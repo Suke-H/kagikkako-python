@@ -1,8 +1,9 @@
 from common._enum.ObjectType import ObjectType
 
 class Goal:
-    def __init__(self, goal_object_type: ObjectType):
-        self.goal_object_type = goal_object_type
+    def __init__(self, goal_object_pair: list[ObjectType, ObjectType]):
+        self.goal_object_pair = goal_object_pair
 
     def _print(self):
-        print("goal_object_type: ", self.goal_object_type)
+        print("goal_object_pair: ", self.goal_object_pair)
+        

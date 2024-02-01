@@ -14,15 +14,16 @@ def load_stage(path: str) -> (Player, Map, Goal):
     with open(path + "data.yaml") as f:
         data = full_load(f)    
 
-    player_init_position = data["player_init_position"]
-    goal_object_type = ObjectType(data["goal_object_type"])
+    player_init_position: list[int, int] = data["player_init_position"]
+    pair = data["goal_object_pair"]
+    goal_object_pair: list[ObjectType, ObjectType] = [ObjectType(pair[0]), ObjectType(pair[1])]
 
     # CSVから本マップと物語マップを作成
     bookMap = np.loadtxt(path + "book.csv", delimiter=",", dtype=int)
     storyMap = np.loadtxt(path + "story.csv", delimiter=",", dtype=int)
 
     # ステージデータ作成
-    stageData = StageData(player_init_position, goal_object_type, bookMap, storyMap)
+    stageData = StageData(player_init_position, goal_object_pair, bookMap, storyMap)
     # stageData._print()    
 
     # プレイヤー作成
@@ -31,7 +32,7 @@ def load_stage(path: str) -> (Player, Map, Goal):
     print(player.player_state.position)
 
     # ゴール作成
-    goal = Goal(stageData.goal_object_type)
+    goal = Goal(stageData.goal_object_pair)
     goal._print()
 
     # マップ作成
