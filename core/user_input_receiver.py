@@ -1,6 +1,7 @@
 from common._enum.UserInput import UserInput
 
-def respond_to_user_input():
+
+def respond_to_user_input() -> UserInput:
     """
     ユーザーの入力を待つ
     """
@@ -12,7 +13,7 @@ def respond_to_user_input():
 
     return user_input
 
-def get_user_input(user_input: UserInput):
+def get_user_input(user_input: UserInput) -> UserInput:
     """
     入力された文字列に応じて、UserInputの値を返す
     """ 

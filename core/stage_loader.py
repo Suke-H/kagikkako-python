@@ -8,7 +8,7 @@ from components.Player import Player
 from components.Map import Map
 from components.Goal import Goal
 
-def load_stage(path: str):
+def load_stage(path: str) -> (Player, Map, Goal):
 
     # yamlファイルからステージ情報を読み込む
     with open(path + "data.yaml") as f:
@@ -28,6 +28,7 @@ def load_stage(path: str):
     # プレイヤー作成
     player = Player(stageData.player_init_position)
     player._print()
+    print(player.player_state.position)
 
     # ゴール作成
     goal = Goal(stageData.goal_object_type)
@@ -36,5 +37,7 @@ def load_stage(path: str):
     # マップ作成
     map = Map(stageData.bookMap, stageData.storyMap)
     map._print()
+
+    return (player, map, goal)
 
     
