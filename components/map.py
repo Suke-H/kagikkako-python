@@ -7,27 +7,27 @@ from components.Word import Word
 
 class Map:
     def __init__(self, book_map: np.array, story_map: np.array):
-        self.book_map = book_map
-        self.story_map = story_map
+        self.__book_map = book_map
+        self.__story_map = story_map
 
         # オブジェクトマップの作成
-        self.object_map = self.create_object_map(self.book_map)
+        self.object_map = self.create_object_map(self.__book_map)
         # ワードマップの作成
-        self.word_map = self.create_word_map(self.story_map)
+        self.word_map = self.create_word_map(self.__story_map)
 
     def create_object_map(self, object_map: np.array) -> np.array:
-        object_map = np.full_like(self.book_map, None, dtype=object)
-        for y in range(len(self.book_map)):
-            for x in range(len(self.book_map[y])):
-                object_map[y][x] = Map.convert_to_object(ObjectType(self.book_map[y][x]), [x, y])
+        object_map = np.full_like(self.__book_map, None, dtype=object)
+        for y in range(len(self.__book_map)):
+            for x in range(len(self.__book_map[y])):
+                object_map[y][x] = Map.convert_to_object(ObjectType(self.__book_map[y][x]), [x, y])
 
         return object_map
     
     def create_word_map(self, word_map: np.array) -> np.array:
-        word_map = np.full_like(self.story_map, None, dtype=object)
-        for y in range(len(self.story_map)):
-            for x in range(len(self.story_map[y])):
-                word_map[y][x] = Map.convert_to_word(ObjectType(self.story_map[y][x]), [x, y])
+        word_map = np.full_like(self.__story_map, None, dtype=object)
+        for y in range(len(self.__story_map)):
+            for x in range(len(self.__story_map[y])):
+                word_map[y][x] = Map.convert_to_word(ObjectType(self.__story_map[y][x]), [x, y])
 
         return word_map
 
