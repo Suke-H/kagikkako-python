@@ -8,8 +8,6 @@ def decide_action(user_input: UserInput, player: Player) -> Actions:
     current_position = player.player_state.position
     next_position = calc_next_position(current_position, user_input)
 
-    print("next_position: ", next_position)
-
     # 行動を決定
     action = Actions(next_position)
 

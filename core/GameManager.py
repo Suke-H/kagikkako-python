@@ -6,6 +6,7 @@ from components.Goal import Goal
 from core.stage_loader import load_stage
 from core.user_input_receiver import respond_to_user_input
 from core.action_decision_maker import decide_action
+from core.action_sender import send_action
 
 class GameManager:
     player: Player
@@ -23,5 +24,8 @@ class GameManager:
             print(user_input)
 
             # ユーザーの入力から行動を決定する
-            action = decide_action(user_input, self.player)
-            action._print()
+            actions = decide_action(user_input, self.player)
+            actions._print()
+
+            # 行動を送信
+            send_action(actions, self.player, self.map)
