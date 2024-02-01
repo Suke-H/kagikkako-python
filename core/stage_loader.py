@@ -10,13 +10,13 @@ def load_stage(path: str):
         data = full_load(f)    
     print(data)
 
-    playerInitPosition = data["playerInitPosition"]
-    goalObjectType = data["goalObjectType"]
+    player_init_position = data["player_init_position"]
+    goal_object_type = ObjectType(data["goal_object_type"])
 
     # CSVから本マップと物語マップを作成
     bookMap = np.loadtxt(path + "book.csv", delimiter=",", dtype=int)
     storyMap = np.loadtxt(path + "story.csv", delimiter=",", dtype=int)
 
     # ステージデータ作成
-    stageData: StageData = StageData(playerInitPosition, goalObjectType, bookMap, storyMap)
+    stageData: StageData = StageData(player_init_position, goal_object_type, bookMap, storyMap)
     stageData._print()    
