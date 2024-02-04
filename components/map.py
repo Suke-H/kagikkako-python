@@ -14,13 +14,13 @@ class Map:
         # ワードマップの作成
         self.word_map = self.create_word_map(self.__story_map)
 
-    def access_object(self, position: list[int, int]) -> Object:
-        return self.object_map[position[1]][position[0]]
+    def access_player_object(self, position: list[int, int]) -> Object:
+        return self.object_map[position[1]][position[0]][0]
     
     def move_object(self, current_position: list[int, int], next_position: list[int, int]):
         object = self.access_object(current_position)
-        self.object_map[current_position[1]][current_position[0]] = None
-        self.object_map[next_position[1]][next_position[0]] = object
+        self.object_map[current_position[1]][current_position[0]] = []
+        self.object_map[next_position[1]][next_position[0]].append(object)
 
     def create_object_map(self, object_map: np.array) -> np.array:
         object_map = np.full_like(self.__book_map, None, dtype=object)
@@ -38,34 +38,44 @@ class Map:
 
         return word_map
 
-    def convert_to_object(object_type: ObjectType, position: list[int, int]) -> Object:
+    def convert_to_object(object_type: ObjectType, position: list[int, int]) -> list:
         if (object_type == ObjectType.NONE):
-            return None
-        return Object(object_type, position)
+            return []
+        return [Object(object_type, position)]
     
     def convert_to_word(object_type: ObjectType, position: list[int, int]) -> Word:
         if (object_type == ObjectType.NONE):
-            return None
-        return Word(object_type, position)
+            return []
+        return [Word(object_type, position)]
 
     def print_object_map(self):
-        print(" -- object map -- ")
+        print(" -- word map -- ")
         for y in range(len(self.object_map)):
             row = ""
             for x in range(len(self.object_map[y])):
-                if (self.object_map[y][x] == None):
+                if len(self.object_map[y][x]) == 0:
                     row += "NONE "
-                else:
-                    row += self.object_map[y][x].object_state.object_type.name + " "
-            print(row)
+                    continue
+                mass = "["
+                for i in range(len(self.object_map[y][x])):
+                    row += self.object_map[y][x][i].object_state.object_type.name + ","
+                mass += "] "
+                row += mass
 
     def print_word_map(self):
         print(" -- word map -- ")
         for y in range(len(self.word_map)):
             row = ""
             for x in range(len(self.word_map[y])):
-                if (self.word_map[y][x] == None):
-                    row += "NONE "
-                else:
-                    row += self.word_map[y][x].word_state.object_type.name + " "
+                mass = "["
+                if len(self.word_map[y][x]) != 0:
+                    for i in range(len(self.word_map[y][x])):
+                        mass += self.word_map[y][x][i].word_state.word_type.name + ","
+                mass += "] "
+                row += mass
+                # if (self.word_map[y][x] == None):
+                #     row += "NONE "
+                # else:
+                #     row += self.word_map[y][x].word_state.object_type.name + " "
+
             print(row)
