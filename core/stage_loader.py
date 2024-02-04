@@ -7,6 +7,7 @@ from common._class.StageData import StageData
 from components.Player import Player
 from components.Map import Map
 from components.Goal import Goal
+from components.Object import Object
 
 def load_stage(path: str) -> (Player, Map, Goal):
 
@@ -26,18 +27,18 @@ def load_stage(path: str) -> (Player, Map, Goal):
     stageData = StageData(player_init_position, goal_object_pair, bookMap, storyMap)
     # stageData._print()    
 
+    # マップ作成
+    map = Map(stageData.bookMap, stageData.storyMap)
+    map._print()
+
     # プレイヤー作成
-    player = Player(stageData.player_init_position)
+    player_object = map.access_player_object(player_init_position)
+    player = Player(stageData.player_init_position, player_object)
     player._print()
-    print(player.player_state.position)
 
     # ゴール作成
     goal = Goal(stageData.goal_object_pair)
     goal._print()
-
-    # マップ作成
-    map = Map(stageData.bookMap, stageData.storyMap)
-    map._print()
 
     return (player, map, goal)
 

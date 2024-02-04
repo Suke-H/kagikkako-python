@@ -7,3 +7,5 @@ class Goal:
     def _print(self):
         print("goal_object_pair: ", self.goal_object_pair)
         
+    # def check_goal(self, object_type: ObjectType) -> bool:
+    #     return object_type in self.goal_object_pair

@@ -15,6 +15,9 @@ class Map:
         # ワードマップの作成
         self.word_map = self.create_word_map(self.__story_map)
 
+    def access_player_object(self, position: list[int, int]) -> Object:
+        return self.object_map[position[1]][position[0]]
+
     def create_object_map(self, object_map: np.array) -> np.array:
         object_map = np.full_like(self.__book_map, None, dtype=object)
         for y in range(len(self.__book_map)):
