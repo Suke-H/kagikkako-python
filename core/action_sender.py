@@ -12,4 +12,4 @@ def send_action(actions: Actions, player: Player, map: Map, goal: Goal):
     player.move(actions.next_position)
 
     # ゴール判定
-    goal.detect(map.player_map, map.object_map)
+    goal.update_goal(actions.is_goal)

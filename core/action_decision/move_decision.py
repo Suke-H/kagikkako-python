@@ -2,12 +2,14 @@ import numpy as np
 
 from common._class.Actions import Actions
 from components.Map import Map
+from components.Player import Player
+from components.Goal import Goal
 
 from core.action_decision.book_world_decision import transfer_to_object
 import core.action_decision.story_world_decision as swd
 
 
-def decide_to_move(current_position: list[int, int], next_position: list[int, int], map: Map) -> Actions:
+def decide_to_move(current_position: list[int, int], next_position: list[int, int], map: Map, player: Player, goal: Goal) -> Actions:
 
     # マップの外に出ようとしている場合は移動しない
     if not is_inside_map(next_position, map.word_map):
@@ -20,10 +22,10 @@ def decide_to_move(current_position: list[int, int], next_position: list[int, in
     # ...
 
     # オブジェクトマップを確認して、移動できるか判定
-    can_move = swd.can_move(next_position, map.object_map)
+    (can_move, is_goal) = swd.can_move(next_position, map.object_map, player, goal)
 
     if can_move:
-        return Actions(current_position, next_position)
+        return Actions(current_position, next_position, is_goal=is_goal)
     else:
         return Actions(current_position, current_position)
     

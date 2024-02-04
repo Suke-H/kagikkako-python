@@ -24,7 +24,7 @@ class GameManager:
             print(user_input)
 
             # ユーザーの入力から行動を決定する
-            actions = decide_action(user_input, self.player, self.map)
+            actions = decide_action(user_input, self.map, self.player, self.goal)
             actions._print()
 
             # 行動を送信
