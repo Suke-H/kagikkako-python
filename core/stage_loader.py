@@ -29,10 +29,11 @@ def load_stage(path: str) -> (Player, Map, Goal):
 
     # マップ作成
     map = Map(stageData.bookMap, stageData.storyMap)
-    map._print()
+    map.print_object_map()
+    map.print_word_map()
 
     # プレイヤー作成
-    player_object = map.access_player_object(player_init_position)
+    player_object = map.access_object(player_init_position)
     player = Player(stageData.player_init_position, player_object)
     player._print()
 

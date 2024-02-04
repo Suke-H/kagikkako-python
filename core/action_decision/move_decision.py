@@ -11,7 +11,7 @@ def decide_to_move(current_position: list[int, int], next_position: list[int, in
 
     # マップの外に出ようとしている場合は移動しない
     if not is_inside_map(next_position, map.word_map):
-        return Actions(current_position)
+        return Actions(current_position, current_position)
 
     # 本の文字を踏んだか判定
     next_word_state = transfer_to_object(next_position, map.word_map)
@@ -26,7 +26,7 @@ def decide_to_move(current_position: list[int, int], next_position: list[int, in
     # ...
 
     # 何もない場合は移動する
-    return Actions(next_position)
+    return Actions(current_position, next_position)
     
 
 def is_inside_map(next_position: list[int, int], map: np.array) -> bool:
