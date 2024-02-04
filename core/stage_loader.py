@@ -28,14 +28,15 @@ def load_stage(path: str) -> (Player, Map, Goal):
     # stageData._print()    
 
     # マップ作成
-    map = Map(stageData.bookMap, stageData.storyMap)
+    map = Map(stageData.bookMap, stageData.storyMap, ObjectType.I)
     map.print_object_map()
     map.print_word_map()
+    map.print_player_map()
 
     # プレイヤー作成
-    player_object = map.access_object(player_init_position)
+    player_object = map.access_player(player_init_position)
     player = Player(stageData.player_init_position, player_object)
-    player._print()
+    # player._print()
 
     # ゴール作成
     goal = Goal(stageData.goal_object_pair)
