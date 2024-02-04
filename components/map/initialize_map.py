@@ -4,11 +4,11 @@ from common._enum.ObjectType import ObjectType
 from components.Object import Object
 from components.Word import Word
 
-def create_object_map(source_map: np.array) -> np.array:
+def create_object_map(source_map: np.array, can_push_table: dict[ObjectType, bool]) -> np.array:
         object_map = np.full_like(source_map, None, dtype=object)
         for y in range(len(source_map)):
             for x in range(len(source_map[y])):
-                object_map[y][x] = _convert_to_object(ObjectType(source_map[y][x]), [x, y])
+                object_map[y][x] = _convert_to_object(ObjectType(source_map[y][x]), [x, y], can_push_table)
 
         return object_map
     
@@ -33,10 +33,10 @@ def create_player_map(object_map: np.array, player_object_type: ObjectType) -> n
 
     return player_map
 
-def _convert_to_object(object_type: ObjectType, position: list[int, int]) -> Object:
+def _convert_to_object(object_type: ObjectType, position: list[int, int],  can_push_table: dict[ObjectType, bool]) -> Object:
     if (object_type == ObjectType.NONE):
         return None
-    return Object(object_type, position)
+    return Object(object_type, position, can_push_table[object_type])
 
 def _convert_to_word(object_type: ObjectType, position: list[int, int]) -> Word:
     if (object_type == ObjectType.NONE):

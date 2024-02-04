@@ -3,7 +3,9 @@ from components.Player import Player
 from components.Map import Map
 from components.Goal import Goal
 
-from core.stage_loader import load_stage
+from common._enum.ObjectType import ObjectType
+
+from core.stage_loader import load_stage, load_can_push_table
 from core.user_input_receiver import respond_to_user_input
 from core.action_decision_maker import decide_action
 from core.action_sender import send_action
@@ -14,7 +16,8 @@ class GameManager:
     goal: Goal
 
     def start_game(self):
-        (self.player, self.map, self.goal) = load_stage("stage_data/1/")
+        (self.player, self.map, self.goal) = load_stage("stage_data/")
+        
         self.game_loop()
 
     def game_loop(self):

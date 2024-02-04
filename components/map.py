@@ -8,14 +8,14 @@ import components.map.print_map as pm
 
 
 class Map:
-    def __init__(self, book_map: np.array, story_map: np.array, player_object_type: ObjectType):
+    def __init__(self, book_map: np.array, story_map: np.array, player_object_type: ObjectType, can_push_table: dict[ObjectType, bool]):
         self.__book_map = book_map
         self.__story_map = story_map
 
         # オブジェクトマップの作成
-        self.object_map = im.create_object_map(self.__book_map)
+        self.object_map = im.create_object_map(self.__story_map, can_push_table)
         # ワードマップの作成
-        self.word_map = im.create_word_map(self.__story_map)
+        self.word_map = im.create_word_map(self.__book_map)
         # プレイヤーマップの初期化
         self.player_map = im.create_player_map(self.object_map, player_object_type)
 
