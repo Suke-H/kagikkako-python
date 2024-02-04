@@ -19,7 +19,6 @@ def decide_to_move(current_position: list[int, int], next_position: list[int, in
     # 本の文字を踏んだか判定
     next_word_state = transfer_to_object(next_position, map.word_map)
     
-
     # 踏んだ場合の処理
     # ...
 

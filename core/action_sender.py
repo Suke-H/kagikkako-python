@@ -6,6 +6,8 @@ from common._class.Actions import Actions
 def send_action(actions: Actions, player: Player, map: Map, goal: Goal):
     # マップ上のプレイヤーを移動
     map.move_player(actions.player_action.current_position, actions.player_action.next_position)
+    # オブジェクトを移動
+    map.move_objects(actions.object_actions)
     map.print_player_and_object_map()
 
     # プレイヤーの行動を送信
