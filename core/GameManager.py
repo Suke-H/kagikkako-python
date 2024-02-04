@@ -28,4 +28,8 @@ class GameManager:
             actions._print()
 
             # 行動を送信
-            send_action(actions, self.player, self.map)
+            send_action(actions, self.player, self.map, self.goal)
+
+            # ゴール判定
+            if self.goal.is_goal:
+                break

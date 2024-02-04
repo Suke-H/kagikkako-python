@@ -1,6 +1,8 @@
 class Actions:
-    def __init__(self, next_player_position: list[int, int]):
-        self.next_player_position = next_player_position
-    
+    def __init__(self, current_position: list[int, int], next_position: list[int, int]):
+        self.current_position = current_position[:]
+        self.next_position = next_position[:]
+
     def _print(self):
-        print(f"next_player_position: {self.next_player_position}")
+        print("current_position: ", self.current_position)
+        print("next_position: ", self.next_position)
