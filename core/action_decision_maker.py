@@ -3,15 +3,16 @@ from common._class.Actions import Actions
 
 from components.Player import Player
 from components.Map import Map
+from components.Goal import Goal
 from core.action_decision.move_decision import decide_to_move
 
-def decide_action(user_input: UserInput, player: Player, map: Map) -> Actions:
+def decide_action(user_input: UserInput, map: Map, player: Player, goal: Goal) -> Actions:
     # プレイヤーの次の位置を計算
     current_position = player.player_state.position
     next_position = calc_next_position(current_position, user_input)
 
     # 行動を決定
-    action = decide_to_move(current_position, next_position, map)
+    action = decide_to_move(current_position, next_position, map, player, goal)
 
     return action
 
