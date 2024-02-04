@@ -10,9 +10,8 @@ from components.Goal import Goal
 from components.Object import Object
 
 def load_stage(path: str) -> (Player, Map, Goal):
-
     # yamlファイルからステージ情報を読み込む
-    with open(path + "data.yaml") as f:
+    with open(path + "1/data.yaml") as f:
         data = full_load(f)    
 
     player_init_position: list[int, int] = data["player_init_position"]
@@ -20,15 +19,18 @@ def load_stage(path: str) -> (Player, Map, Goal):
     goal_object_pair: list[ObjectType, ObjectType] = [ObjectType(pair[0]), ObjectType(pair[1])]
 
     # CSVから本マップと物語マップを作成
-    bookMap = np.loadtxt(path + "book.csv", delimiter=",", dtype=int)
-    storyMap = np.loadtxt(path + "story.csv", delimiter=",", dtype=int)
+    bookMap = np.loadtxt(path + "1/book.csv", delimiter=",", dtype=int)
+    storyMap = np.loadtxt(path + "1/story.csv", delimiter=",", dtype=int)
 
     # ステージデータ作成
     stageData = StageData(player_init_position, goal_object_pair, bookMap, storyMap)
     # stageData._print()    
 
+    # can push表を読み込む
+    can_push_table = load_can_push_table(path)
+
     # マップ作成
-    map = Map(stageData.bookMap, stageData.storyMap, ObjectType.I)
+    map = Map(stageData.bookMap, stageData.storyMap, ObjectType.I, can_push_table)
     map.print_object_map()
     map.print_word_map()
     map.print_player_map()
@@ -44,4 +46,11 @@ def load_stage(path: str) -> (Player, Map, Goal):
 
     return (player, map, goal)
 
+def load_can_push_table(path: str) -> dict[ObjectType, bool]:
+    with open(path + "can_push.yaml") as f:
+        data = full_load(f)
+
+    # キー（文字列）をObjectTypeに変換
+    table = {ObjectType(key): value for key, value in data.items()}
+    return table
     
