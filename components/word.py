@@ -3,7 +3,7 @@ from common._enum.ObjectType import ObjectType
 
 class Word:
     def __init__(self, word_type: ObjectType, position: list[int, int]):
-        self.word_state = WordState(word_type=word_type, position=position, is_player=False)
+        self.word_state = WordState(word_type, position)
 
     def _print(self):
         print("Word:")

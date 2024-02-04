@@ -33,7 +33,7 @@ def load_stage(path: str) -> (Player, Map, Goal):
     map.print_word_map()
 
     # プレイヤー作成
-    player_object = map.access_player_object(player_init_position)
+    player_object = map.access_object(player_init_position)
     player = Player(stageData.player_init_position, player_object)
     player._print()
 
