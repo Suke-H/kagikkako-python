@@ -18,18 +18,15 @@ def decide_to_move(current_position: list[int, int], next_position: list[int, in
 
     # 本の文字を踏んだか判定
     next_word_state = transfer_to_object(next_position, map.word_map)
+    
 
     # 踏んだ場合の処理
     # ...
 
     # オブジェクトマップを確認して、移動できるか判定
-    (can_move, is_goal) = swd.can_move(next_position, map.object_map, player, goal)
+    actions: Actions = swd.can_move(current_position, next_position, map.object_map, player, goal)
 
-    if can_move:
-        return Actions(PlayerAction(current_position, next_position), [], is_goal=is_goal)
-    else:
-        return Actions(PlayerAction(current_position, current_position), [])
-    
+    return actions    
 
 def is_inside_map(next_position: list[int, int], map: np.array) -> bool:
     x , y = next_position[0], next_position[1]
