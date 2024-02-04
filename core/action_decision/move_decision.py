@@ -4,7 +4,7 @@ from common._class.Actions import Actions
 from components.Map import Map
 
 from core.action_decision.book_world_decision import transfer_to_object
-from core.action_decision.story_world_decision import chack_object
+import core.action_decision.story_world_decision as swd
 
 
 def decide_to_move(current_position: list[int, int], next_position: list[int, int], map: Map) -> Actions:
@@ -19,14 +19,13 @@ def decide_to_move(current_position: list[int, int], next_position: list[int, in
     # 踏んだ場合の処理
     # ...
 
-    # オブジェクトがあるか判定
-    next_object_state = chack_object(next_position, map.object_map)
+    # オブジェクトマップを確認して、移動できるか判定
+    can_move = swd.can_move(next_position, map.object_map)
 
-    # オブジェクトがある場合の処理
-    # ...
-
-    # 何もない場合は移動する
-    return Actions(current_position, next_position)
+    if can_move:
+        return Actions(current_position, next_position)
+    else:
+        return Actions(current_position, current_position)
     
 
 def is_inside_map(next_position: list[int, int], map: np.array) -> bool:
