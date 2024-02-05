@@ -14,7 +14,7 @@ def decide_to_move(current_position: list[int, int], next_position: list[int, in
 
     # マップの外に出ようとしている場合は移動しない
     if not is_inside_map(next_position, map.word_map):
-        return Actions(PlayerAction(current_position, current_position), [])
+        return Actions(PlayerAction(current_position, current_position), [], False)
 
     # 本の文字を踏んだか判定
     next_word_state = transfer_to_object(next_position, map.word_map)
