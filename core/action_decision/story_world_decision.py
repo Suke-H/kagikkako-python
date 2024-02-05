@@ -14,18 +14,20 @@ def can_move(current_position: list[int, int], next_position: list[int, int], ob
 
     nomove_player_action: PlayerAction = PlayerAction(current_position, current_position)
     move_player_action: PlayerAction = PlayerAction(current_position, next_position)
-    is_goal: bool = False # ゴールに到達しているか
     object_actions: list[ObjectAction] = [] # オブジェクトの行動
 
     # 次の位置にオブジェクトがない場合
     if (object_state_at_next_position == None):
-        return Actions(move_player_action, object_actions, is_goal) # (移動可能, オブジェクトの行動はない, ゴールに到達していない)
+        return Actions(move_player_action, object_actions, False) # (移動可能, オブジェクトの行動はない, ゴールに到達していない)
     
-    """ 次の位置にオブジェクトがある場合 """
-    # ゴールに到達しているか確認
+    # 次の位置にオブジェクトがある場合
+    ## ゴールに到達しているか確認 ##
     is_goal = goal.is_touch_with_goal_pair(player.player_state.object_type, object_state_at_next_position.object_type)
-    can_push: bool = False # 押せるか
-
+    if (is_goal):
+        return Actions(move_player_action, object_actions, True)
+    
+    ## 「押せる」か判定 ##
+    can_push: bool = False 
     #　次の位置にオブジェクトがあり、押せるオブジェクトの場合
     if (object_state_at_next_position.can_push):
         # マップ全体を見て、「押せる」か確認
@@ -36,10 +38,9 @@ def can_move(current_position: list[int, int], next_position: list[int, int], ob
 
     # 押せる場合
     if (can_push):
-        return Actions(move_player_action, object_actions, is_goal)
-
+        return Actions(move_player_action, object_actions, False)
     # 押せない場合
-    return Actions(nomove_player_action, object_actions, is_goal)
+    return Actions(nomove_player_action, object_actions, False)
 
 def _chack_object_state(next_position: list[int, int], object_map: np.array) -> ObjectState:
     next_object: Object = object_map[next_position[1]][next_position[0]]
