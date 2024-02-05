@@ -10,6 +10,8 @@ from core.user_input_receiver import respond_to_user_input
 from core.action_decision_maker import decide_action
 from core.action_sender import send_action
 
+from gui.PuzzleGUI import PuzzleGUI
+
 class GameManager:
     player: Player
     map: Map
@@ -17,6 +19,8 @@ class GameManager:
 
     def start_game(self):
         (self.player, self.map, self.goal) = load_stage("stage_data/")
+
+        PuzzleGUI()
         
         self.game_loop()
 
