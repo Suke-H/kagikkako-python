@@ -46,7 +46,7 @@ class PuzzleGUI:
     
     def update_display(self, object_map: np.array, player_map: np.array):
         # 画面全体を黒色で塗りつぶす
-        self.screen.fill((0, 0, 0))
+        self.screen.fill((88, 88, 88))
         
         # パズルの各セルを描画
         for row in range(self.GRID_SIZE):
