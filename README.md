@@ -3,7 +3,7 @@
 Unityで制作予定のゲーム「`「」の物語`」のプロトタイプ  
 pygameを用いて作成中
 
-<img src="sample/screenshot.png" width="50%">
+<img src="sample/capture.gif" width="70%">
 
 
 # ゲームの概要
