@@ -10,6 +10,18 @@ from components.Goal import Goal
 from components.Object import Object
 
 def load_stage(path: str) -> (Player, Map, Goal):
+    """
+    ステージを読み込む
+    Parameters
+    ----------
+    path : str
+        ステージデータのパス
+        
+    Returns
+    -------
+    (Player, Map, Goal)
+        プレイヤー、マップ、ゴールのインスタンス
+    """
     # yamlファイルからステージ情報を読み込む
     with open(path + "1/data.yaml") as f:
         data = full_load(f)    

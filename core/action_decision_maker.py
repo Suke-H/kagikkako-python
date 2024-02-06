@@ -7,6 +7,20 @@ from components.Goal import Goal
 from core.action_decision.move_decision import decide_to_move
 
 def decide_action(user_input: UserInput, map: Map, player: Player, goal: Goal) -> Actions:
+    """
+    ユーザー入力から行動を決定する
+
+    Parameters
+    ----------
+    ( UserInput, Map, Player, Goal )
+        ユーザーの入力、マップ、プレイヤー、ゴールのインスタンス
+    
+    Returns
+    -------
+    Actions
+        行動
+
+    """
     # プレイヤーの次の位置を計算
     current_position = player.player_state.position
     next_position = calc_next_position(current_position, user_input)

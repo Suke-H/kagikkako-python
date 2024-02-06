@@ -5,13 +5,10 @@ from components.Map import Map
 from components.Player import Player
 from components.Goal import Goal
 
-
 from core.action_decision.book_world_decision import transfer_to_object
 import core.action_decision.story_world_decision as swd
 
-
 def decide_to_move(current_position: list[int, int], next_position: list[int, int], map: Map, player: Player, goal: Goal) -> Actions:
-
     # マップの外に出ようとしている場合は移動しない
     if not is_inside_map(next_position, map.word_map):
         return Actions(PlayerAction(current_position, current_position), [], False)
@@ -28,6 +25,20 @@ def decide_to_move(current_position: list[int, int], next_position: list[int, in
     return actions    
 
 def is_inside_map(next_position: list[int, int], map: np.array) -> bool:
+    """
+    マップ内か判定
+
+    Parameters
+    ----------
+    ( next_position, map )
+        次の位置、マップ
+
+    Returns
+    -------
+    bool
+        マップ内にいるかどうか
+
+    """
     x , y = next_position[0], next_position[1]
     if ( x >= 0 and x < len(map) ) and ( y >= 0 and y < len(map[0]) ):
         return True

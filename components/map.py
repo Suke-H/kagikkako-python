@@ -9,6 +9,26 @@ import components.map.print_map as pm
 
 
 class Map:
+    """
+    マップ
+
+    Attributes
+    ----------
+    __book_map : np.array
+        本のマップ（初期化時のみ使用）
+    __story_map : np.array
+        物語のマップ（初期化時のみ使用）
+    object_map : np.array
+        オブジェクトのマップ
+    word_map : np.array
+        文字のマップ
+    player_map : np.array
+        プレイヤーのマップ
+
+    オブジェクトマップとプレイヤーマップには、同一マスに同一オブジェクトが存在しない
+    プレイヤーに乗り移ったオブジェクトが、オブジェクトマップからプレイヤーマップへ遷移する
+    
+    """
     def __init__(self, book_map: np.array, story_map: np.array, player_object_type: ObjectType, can_push_table: dict[ObjectType, bool]):
         self.__book_map = book_map
         self.__story_map = story_map
@@ -27,6 +47,14 @@ class Map:
         return self.player_map[position[1]][position[0]]
     
     def move_objects(self, object_actions: list[ObjectAction]):
+        """
+        オブジェクトマップ上の「複数」オブジェクトを移動させる
+
+        Parameters
+        ----------
+        object_actions : list[ObjectAction]
+            オブジェクトの行動リスト
+        """
         current_positions = [object_action.current_position for object_action in object_actions]
         next_positions = [object_action.next_position for object_action in object_actions]
 
@@ -42,11 +70,17 @@ class Map:
             self.object_map[next[1]][next[0]] = object
 
     def move_player(self, current_position: list[int, int], next_position: list[int, int]):
+        """
+        プレイヤーマップ上のプレイヤーを移動させる
+        """
         player = self.access_player(current_position)
         self.player_map[current_position[1]][current_position[0]] = None
         self.player_map[next_position[1]][next_position[0]] = player
 
     def transfer_player(self, current_player_position: list[int, int], next_player_position: list[int, int]):
+        """
+        次にプレイヤーとなるオブジェクトへ乗り移る
+        """
         # 現在のPlayerオブジェクト：Playerマップ -> Objectマップ
         current_player_object = self.access_player_object(current_player_position)
         self.player_map[current_player_position[1]][current_player_position[0]] = None

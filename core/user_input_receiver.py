@@ -5,8 +5,12 @@ from common._enum.UserInput import UserInput
 def respond_to_user_input() -> UserInput:
     """
     ユーザーの入力を待つ
-    """
 
+    Returns
+    -------
+    UserInput
+        ユーザーの入力
+    """
 
     # ユーザーの入力を受け付ける
     # user_key_input = input("Please input your move(WASD): ")
@@ -23,6 +27,17 @@ def respond_to_user_input() -> UserInput:
 def get_user_input(keys) -> UserInput:
     """
     入力された文字列に応じて、UserInputの値を返す
+
+    Parameters
+    ----------
+    keys : list
+        入力されたキーのリスト
+
+    Returns
+    -------
+    UserInput
+        ユーザーの入力
+        
     """ 
 
     if keys[pygame.K_UP] or keys[pygame.K_w]:
@@ -36,18 +51,3 @@ def get_user_input(keys) -> UserInput:
     else:
         return UserInput.NONE
 
-# def get_user_input(user_input: UserInput) -> UserInput:
-#     """
-#     入力された文字列に応じて、UserInputの値を返す
-#     """ 
-
-#     if user_input == "w":
-#         return UserInput.UP
-#     elif user_input == "s":
-#         return UserInput.DOWN
-#     elif user_input == "a":
-#         return UserInput.LEFT
-#     elif user_input == "d":
-#         return UserInput.RIGHT
-#     else:
-#         return UserInput.NONE

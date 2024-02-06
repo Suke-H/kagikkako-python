@@ -1,6 +1,10 @@
 from common._enum.ObjectType import ObjectType
 from components.Object import Object
 class PlayerState:
+    """
+    プレイヤーの状態
+    （現在使用できていない）
+    """
     def __init__(self, position: list[int, int], is_goal: bool, object_type: ObjectType, player_object: Object):
         self.position = position
         self.is_goal = is_goal
